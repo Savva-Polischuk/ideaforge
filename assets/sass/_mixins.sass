@@ -1,0 +1,76 @@
+@use "sass:string"
+	
+// flex
+
+=flex($direction: false, $justify-content: false, $align-items: false, $wrap: false, $grow: false, $align-content: false, $align-self: false, $flex: false, $gap: 0)
+	display: flex
+	gap: $gap + px
+
+	@if $direction and $wrap
+		flex-flow: $direction $wrap
+	@else if $direction
+		flex-direction: $direction
+	@else if $wrap
+		flex-wrap: $wrap
+
+	@if $justify-content
+		justify-content: $justify-content
+
+	@if $align-items
+		align-items: $align-items
+
+	@if $grow
+		flex-grow: $grow
+
+	@if $align-content
+		align-content: $align-content
+	
+	@if $align-self
+		align-self: $align-self
+	
+	@if $flex
+		flex: $flex
+
+
+
+// adaptive
+
+$desktop_min_width: 1366px
+$laptop_min_width: 1024px
+$tablet_min_width: 768px
+$mobile_min_width: 360px
+
+=desktop
+	@media (min-width: $desktop_min_width)
+		@content
+
+=laptop
+	@media (min-width: $laptop_min_width) and (max-width: $desktop_width - 1px)
+		@content
+
+=tablet
+	@media (min-width: $tablet_min_width) and (max-width: $laptop_min_width - 1px)
+		@content
+
+=mobile
+	@media (max-width: $tablet_min_width - 1px)
+		@content
+
+
+
+
+//transition
+	
+=transition($properties: none, $duration: 1, $func: ease-in-out, $delay: 0)
+	@if $properties == none
+		transition: none
+
+	@else
+		$settings: null
+		$comma: ''
+
+		@each $property in $properties
+			$settings: $settings + $comma + ($property ($duration + s) $func ($delay + s))
+			$comma: ','
+
+		transition: string.unquote($settings)
