@@ -14,4 +14,7 @@ const props = defineProps<Icon>()
 .Logo
     width: inherit
     height: 100%
+
+    &.pointer
+        cursor: pointer
 </style>

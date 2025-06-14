@@ -1,6 +1,6 @@
 <template lang='pug'>
 .Messanger
-    Logo(:name='props.name')
+    Logo.pointer(:name='props.name')
 </template>
 
 <script lang='ts' setup>

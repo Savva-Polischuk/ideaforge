@@ -1,7 +1,7 @@
 <template lang='pug'>
 header.Header
     NuxtLink.logo(to="/")
-        Logo(name="icon:logo")
+        Logo.pointer(name="icon:logo")
     Navigation
 </template>
 

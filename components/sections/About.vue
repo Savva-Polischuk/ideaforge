@@ -66,6 +66,7 @@ const companies = ['icon:riffizen', 'icon:sber', 'icon:s7', 'icon:aeroflot']
 
             .clients-text
                 font-size: 64px
+                font-weight: 500
                 writing-mode: sideways-lr
                 color: #4C5454
 

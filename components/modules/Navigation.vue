@@ -4,7 +4,8 @@
         NuxtLink.nav-el(
             v-for="el in navElements" :key="el.id"
             :to='el[1]') {{ el[0] }}
-    Logo(name='icon:profile')
+    NuxtLink(to='/profile')
+        Logo.pointer(name='icon:profile')
 </template>
 
 <script lang='ts' setup>
