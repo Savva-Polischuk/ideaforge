@@ -4,11 +4,14 @@
         NuxtLink.nav-el(
             v-for="el in navElements" :key="el.id"
             :to='el[1]') {{ el[0] }}
-    NuxtLink(to='/profile')
-        Logo.pointer(name='icon:profile')
+    Logo.pointer(
+        name='icon:profile'
+        @click='isShowModal = !isShowModal')
 </template>
 
 <script lang='ts' setup>
+const isShowModal = defineModel<boolean>()
+
 const navElements = [
     ['О НАС', '#'], 
     ['УСЛУГИ', '#'], 

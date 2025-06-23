@@ -2,11 +2,13 @@
 header.Header
     NuxtLink.logo(to="/")
         Logo.pointer(name="icon:logo")
-    Navigation
+    Navigation(v-model='isShowModal')
+
+    Modal(v-model='isShowModal')
 </template>
 
 <script lang='ts' setup>
-
+const isShowModal = ref(false)
 </script>
 
 <style lang='sass' scoped>
