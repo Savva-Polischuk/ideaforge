@@ -1,5 +1,5 @@
 <template lang='pug'>
-h1 ЗДРАВСТВУЙТЕ, ИВАН!
+h1 ЗДРАВСТВУЙТЕ, САВВА!
 Projects
 </template>
 

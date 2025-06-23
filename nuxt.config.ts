@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2025-05-15',
+  runtimeConfig: {
+    telegramBotToken: process.env.TELEGRAM_BOT_TOKEN,
+    telegramChatID: process.env.TELEGRAM_CHAT_ID
+  },
   devtools: { enabled: true },
     modules: ['@nuxt/icon', 'nuxt-swiper'],
   icon: {

@@ -1,22 +1,61 @@
 <template lang='pug'>
 form.Form(@submit.prevent="handleSubmitClick")
-    h2 ОСТАВТЕ ЗАЯВКУ
+    h2 ОСТАВЬТЕ ЗАЯВКУ
     .info
         p.info-text НАПИШИТЕ НАМ ЗАЯВКУ #[br]НА ВЫБРАННУЮ УСЛУГУ #[br]С КРАТКИМ ОПИСАНИЕМ #[br]ДЕЯТЕЛЬНОСТИ КОМПАНИИ #[br]ИЛИ КОНЦЕПЦИЕЙ САЙТА
         .info-inputs
             Input(
+                v-model="clientName"
                 name='name'
                 placeholder='фио')
             Input(
+                v-model="clientEmail"
                 name='email'
                 placeholder='почта'
                 type='email')
-    textarea.description(placeholder='описание')
+    textarea.description(
+        v-model='clientAppeal'
+        placeholder='описание')
     button.submit(type="submit") ОТПРАВИТЬ
 </template>
 
 <script lang='ts' setup>
+const clientName = ref('')
+const clientEmail = ref('')
+const clientAppeal = ref('')
 
+const resetForm = () => {
+    clientName.value = ''
+    clientEmail.value = ''
+    clientAppeal.value = ''
+}
+
+const handleSubmitClick = async () => {
+    await fetch('api/telegramBot', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name: clientName.value,
+            email: clientEmail.value,
+            appeal: clientAppeal.value
+        })
+    }).then(response => response.json())
+    .then(res => {
+        if (res.ok) {
+            alert("Данные успешно отправленны")
+            navigateTo('/')
+            resetForm()
+        } 
+        else {
+            alert("Произошла ошибка, повторите отправку")
+        }
+    })
+    .catch(error => {
+        console.error(`Error: ${error}`)
+    })
+}
 </script>
 
 <style lang='sass' scoped>
