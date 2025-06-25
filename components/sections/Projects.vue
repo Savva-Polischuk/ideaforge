@@ -9,7 +9,7 @@
 </template>
 
 <script lang='ts' setup>
-const projects = [
+const projects = ref([
     {
         name: 'Главный сайт', 
         description: 'Сайт цветочного магазина', 
@@ -34,7 +34,32 @@ const projects = [
         stage: 'ДЕПЛОЙ НА ХОСТИНГ', 
         progress: 75
     }
-]
+])
+
+
+const handleLoadProjects = async (clientId: string) => {
+    await fetch(`http://127.0.0.1:8000/profile?${new URLSearchParams({ client_id: clientId })}`, {
+        method: 'GET'
+    }).then(response => response.json())
+    .then(res => {
+        if (res) {
+            projects.value = res
+        } 
+        else {
+            alert("Произошла ошибка")
+        }
+		console.log(res)
+    })
+    .catch(error => {
+        console.error(`Error: ${error}`)
+    })
+}
+
+onMounted(() => {
+    if (localStorage.getItem('user') !== null) {
+        handleLoadProjects(JSON.parse(localStorage.getItem('user')).client_id)
+    }    
+})
 </script>
 
 <style lang='sass' scoped>

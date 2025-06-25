@@ -23,7 +23,10 @@ ClientOnly
 					placeholder='пароль'
 					type='password'
 				)
-				button.submit(type="submit") ВОЙТИ
+				button.submit(
+					@click='handleSubmitClick'
+					type="submit"
+					) ВОЙТИ
 </template>
 
 <script lang='ts' setup>
@@ -35,6 +38,27 @@ const password = ref('')
 
 const closeHandler = () => {
     isShow.value = false
+}
+
+const handleSubmitClick = async () => {
+    await fetch(`http://127.0.0.1:8000/?${new URLSearchParams({ email: email.value, password: password.value})}`, {
+        method: 'POST'
+    }).then(response => response.json())
+    .then(res => {
+        if (res) {
+            alert("успешно")
+            navigateTo('/profile')
+			isShow.value = false
+			localStorage.setItem('user', JSON.stringify(res))
+        } 
+        else {
+            alert("Неправильная почта или пароль")
+        }
+		console.log(res)
+    })
+    .catch(error => {
+        console.error(`Error: ${error}`)
+    })
 }
 </script>
 

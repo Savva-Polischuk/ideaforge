@@ -1,10 +1,19 @@
 <template lang='pug'>
-h1 ЗДРАВСТВУЙТЕ, САВВА!
+h1 ЗДРАВСТВУЙТЕ, {{ userName }}!
 Projects
 </template>
 
 <script lang='ts' setup>
+const userName = ref('')
 
+onBeforeMount(() => {
+    if (localStorage.getItem('user') !== null) {
+        userName.value = JSON.parse(localStorage.getItem('user')).name.toUpperCase()
+    }
+    else {
+        navigateTo('/')
+    }
+})
 </script>
 
 <style lang='sass' scoped>
