@@ -2,7 +2,6 @@
 Header
 .page
     slot
-Footer
 </template>
 
 <style lang='sass' scoped>

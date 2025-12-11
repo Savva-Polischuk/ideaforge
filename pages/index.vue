@@ -4,6 +4,7 @@ About
 Services
 Form
 Headline.hline-contacts(text='КОНТАКТЫ')
+Footer
 </template>
 
 <style lang="sass">

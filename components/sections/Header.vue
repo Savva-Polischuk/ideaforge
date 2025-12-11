@@ -2,13 +2,30 @@
 header.Header
     NuxtLink.logo(to="/")
         Logo.pointer(name="icon:logo")
-    Navigation(v-model='isShowModal')
+    Navigation(v-model='isShowEnterModal')
 
-    Modal(v-model='isShowModal')
+    Modal(
+        v-model='isShowRegistrationModal'
+        isRegistration
+        @openEnter='handleOpenEnter')
+    Modal(
+        v-model='isShowEnterModal'
+        @openRegistration='handleOpenRegistration')
 </template>
 
 <script lang='ts' setup>
-const isShowModal = ref(false)
+const isShowRegistrationModal = ref(false)
+const isShowEnterModal = ref(false)
+
+const handleOpenEnter = () => {
+    isShowRegistrationModal.value = false
+    isShowEnterModal.value = true
+}
+
+const handleOpenRegistration = () => {
+    isShowEnterModal.value = false
+    isShowRegistrationModal.value = true
+}
 </script>
 
 <style lang='sass' scoped>

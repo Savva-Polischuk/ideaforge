@@ -1,6 +1,7 @@
 <template lang='pug'>
 h1 ЗДРАВСТВУЙТЕ, {{ userName }}!
 Projects
+Footer
 </template>
 
 <script lang='ts' setup>

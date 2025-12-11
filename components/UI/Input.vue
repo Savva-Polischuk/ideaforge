@@ -4,7 +4,8 @@ input.Input(
     :placeholder="props.placeholder"
     :name="props.name"
     :type="props.type"
-    :required="isRequired"
+    :required="props.isRequired"
+    :disabled="props.isDisabled"
     :pattern="inputPattern(props.type)"
     maxlength="200")
 </template>
@@ -17,6 +18,7 @@ interface Input {
     isRequired?: boolean // true если обязательно
     placeholder: string 
     type?: InputType // тип инпута (текст, телефон, почта) по-умолчанию текст
+    isDisabled: boolean
 }
 
 const props = withDefaults(defineProps<Input>(), {

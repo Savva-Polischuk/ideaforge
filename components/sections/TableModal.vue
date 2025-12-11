@@ -13,10 +13,16 @@ ClientOnly
                         th(
                             v-for="column in Object.keys(props.data[0])" :key="column.id"
                             scope='column') {{ column }}
-                    tr(v-for="item in props.data" :key="item.id")
+                    tr(
+                        v-for="item in props.data" :key="item.id"
+                        @click='handleRowClick(item)')
                         td(
                             v-for="row in item"
                             :scope='row === item[0] ? "row" : false') {{ row }}
+
+                CRUDModal(
+                    v-model='isShowCrudModal'
+                    :row='clickedRow')
 </template>
 
 <script lang='ts' setup>
@@ -26,10 +32,18 @@ interface TableModel {
 
 const props = defineProps<TableModel>()
 const isShow = defineModel<boolean>()
-
+const isShowCrudModal = ref(false)
+const clickedRow = ref<object>()
 
 const closeHandler = () => {
     isShow.value = false
+}
+
+const handleRowClick = (item: object) => {
+    clickedRow.value = Object.assign({}, item)
+    if (clickedRow.value) {
+        isShowCrudModal.value = true
+    }
 }
 
 </script>
@@ -37,7 +51,7 @@ const closeHandler = () => {
 <style lang='sass' scoped>
 .TableModel
     position: fixed
-    z-index: 9998
+    z-index: 99
     top: 0
     left: 0
     width: 100%

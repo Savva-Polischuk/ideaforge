@@ -44,7 +44,7 @@ const handleLoadProjects = async (clientId: string) => {
     .then(res => {
         if (res) {
             projects.value = res
-        } 
+        }
         else {
             alert("Произошла ошибка")
         }
